@@ -1,0 +1,17 @@
+.title {
+  font-style: italic;
+}
+
+table, td, th {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 1rem;
+}
+
+th {
+  border-bottom: 2px solid black;
+}
+
+td:not(:first-child):hover {
+  background-color: lightblue;
+}
