@@ -1,17 +1,117 @@
-.title {
-  font-style: italic;
+/*
+  Josh's Custom CSS Reset
+  https://www.joshwcomeau.com/css/custom-css-reset/
+*/
+
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
-table, td, th {
+* {
+  margin: 0;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+p {
+  text-wrap: pretty;
+}
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+#root, #__next {
+  isolation: isolate;
+}
+
+
+/* My styles */
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding-top: 1rem;
+}
+
+table {
+  align-self: flex-start; 
+  text-align: left;
+  table-layout: fixed;
+}
+
+table,
+th,
+td {
   border: 1px solid black;
   border-collapse: collapse;
-  padding: 1rem;
+  --horizontal-padding: 1.2rem;
+  padding: 0.4rem var(--horizontal-padding);
+}
+
+caption {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+col {
+  &.order {
+    width: calc(3ch + var(--horizontal-padding));
+  }
+
+  &.title {
+    width: calc(35ch + var(--horizontal-padding));
+  }
+
+  &.author {
+    width: calc(15ch + var(--horizontal-padding));
+  }
+
+  &.published {
+    width: calc(7ch + var(--horizontal-padding));
+  }
+
+  &.language {
+    width: calc(15ch + var(--horizontal-padding));  
+  }
+
+  &.genre {
+    width: calc(11ch + var(--horizontal-padding));
+  }
+
+  &.status {
+    width: calc(7ch + var(--horizontal-padding));
+  }
+
+  &.rating {
+    width: calc(7ch + var(--horizontal-padding));
+  }
 }
 
 th {
   border-bottom: 2px solid black;
 }
 
-td:not(:first-child):hover {
-  background-color: lightblue;
+td.order {
+  text-align: center;
+}
+
+td.title {
+  font-style: italic;
 }

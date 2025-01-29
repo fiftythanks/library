@@ -1,13 +1,33 @@
 const myLibrary = [];
 
-function Book(title, author, year) {
+function Book(title, author, published, language, genre, status, rating) {
   this.title = title;
   this.author = author;
-  this.year = year;
+  this.published = published;
+  this.language = language;
+  this.genre = genre;
+  this.status = status;
+  this.rating = rating;
 }
 
-function addBookToLibrary(title, author, year) {
-  let newBook = new Book(title, author, year);
+function addBookToLibrary(
+                          title,
+                          author,
+                          published,
+                          language,
+                          genre,
+                          status,
+                          rating
+                        ) {
+  let newBook = new Book(
+                         title,
+                         author,
+                         published,
+                         language,
+                         genre,
+                         status,
+                         rating
+                        );
   myLibrary.push(newBook);
 }
 
@@ -17,6 +37,7 @@ function fillTable() {
     const row = document.createElement("tr");
 
     const number = document.createElement("td");
+    number.classList.add("order");
     number.textContent = `${i + 1}`;
     row.appendChild(number);
 
@@ -26,12 +47,34 @@ function fillTable() {
     row.appendChild(title);
 
     const author = document.createElement("td");
+    author.classList.add("author");
     author.textContent = myLibrary[i].author;
     row.appendChild(author);
 
-    const year = document.createElement("td");
-    year.textContent = myLibrary[i].year.toString();
-    row.appendChild(year);
+    const published = document.createElement("td");
+    published.classList.add("published");
+    published.textContent = myLibrary[i].published.toString();
+    row.appendChild(published);
+
+    const language = document.createElement("td");
+    language.classList.add("language");
+    language.textContent = myLibrary[i].language;
+    row.appendChild(language);
+
+    const genre = document.createElement("td");
+    genre.classList.add("genre");
+    genre.textContent = myLibrary[i].genre;
+    row.appendChild(genre);
+
+    const status = document.createElement("td");
+    status.classList.add("status");
+    status.textContent = myLibrary[i].status;
+    row.appendChild(status);
+
+    const rating = document.createElement("td");
+    rating.classList.add("rating");
+    rating.textContent = `${myLibrary[i].rating}/10`;
+    row.appendChild(rating);
 
     table.appendChild(row); 
   }
