@@ -1,6 +1,6 @@
 const myLibrary = [];
 
-function Book(title, author, published, language, genre, status, rating) {
+function Book(title="", author="", published="", language="", genre="", status="", rating=0) {
   this.title = title;
   this.author = author;
   this.published = published;
@@ -73,7 +73,15 @@ function fillTable() {
 
     const rating = document.createElement("td");
     rating.classList.add("rating");
-    rating.textContent = `${myLibrary[i].rating}/10`;
+    if (myLibrary[i].rating !== 0) {
+      rating.textContent = `${myLibrary[i].rating}/10`;   
+    }
+
+    const removeBtn = document.createElement("button");
+    removeBtn.classList.add("remove-btn");
+    removeBtn.textContent = "remove";
+    rating.appendChild(removeBtn);
+
     row.appendChild(rating);
 
     table.appendChild(row); 

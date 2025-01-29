@@ -43,15 +43,21 @@ h1, h2, h3, h4, h5, h6 {
 
 /* My styles */
 
+:root {
+  --horizontal-padding: 1.2rem;
+}
+
 body {
   height: 100vh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   padding-top: 1rem;
+  gap: 1rem;
 }
 
 table {
-  align-self: flex-start; 
   text-align: left;
   table-layout: fixed;
 }
@@ -61,7 +67,6 @@ th,
 td {
   border: 1px solid black;
   border-collapse: collapse;
-  --horizontal-padding: 1.2rem;
   padding: 0.4rem var(--horizontal-padding);
 }
 
@@ -92,11 +97,11 @@ col {
   }
 
   &.genre {
-    width: calc(11ch + var(--horizontal-padding));
+    width: calc(12ch + var(--horizontal-padding));
   }
 
   &.status {
-    width: calc(7ch + var(--horizontal-padding));
+    width: calc(8 ch + var(--horizontal-padding));
   }
 
   &.rating {
@@ -114,4 +119,25 @@ td.order {
 
 td.title {
   font-style: italic;
+}
+
+:is(th, td).rating {
+  text-align: right;
+}
+
+td:last-child {
+  position: relative;
+}
+
+.remove-btn {
+  --btn-height: 2rem;
+  height: var(--btn-height);
+  position: absolute;
+  left: calc(100% + 1rem);
+  top: calc(50% - var(--btn-height) / 2);
+  bottom: calc(50% - var(--btn-height) / 2);
+}
+
+.add-btn {
+  padding: 0.3rem var(--horizontal-padding);
 }
