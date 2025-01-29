@@ -138,9 +138,15 @@ td:last-child {
   bottom: calc(50% - var(--btn-height) / 2);
 }
 
-.add-btn {
+.add-btn, .reset-btn {
   padding: 0.3rem var(--horizontal-padding);
   margin-top: 1rem;
+}
+
+div.add-reset {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
 }
 
 form.add {
@@ -163,4 +169,3 @@ div.status-rating {
 .rating option {
   text-align: center;
 }
-

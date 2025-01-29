@@ -49,67 +49,88 @@
     <form action="#" method="post" class="add">
       <div class="title">
         <label for="title">Title</label>
-        <input type="text" name="title" id="title" placeholder="Mathematical Analysis">
+        <input type="text"
+               name="title"
+               id="title"
+               placeholder="Mathematical Analysis"
+               list="for-title">
+        <datalist id="for-title"></datalist>
       </div>
       <div class="author">
         <label for="author">Author</label>
-        <input type="text" name="author" id="author" placeholder="Vladimir Antonovich Zorich">
+        <input type="text"
+               name="author"
+               id="author"
+               placeholder="Vladimir Antonovich Zorich"
+               list="for-author">
+        <datalist id="for-author"></datalist>
       </div>
       <div class="published">
         <label for="published" id="published-label">Published</label>
         <div class="publication-date    ">
-          <input type="number" name="published" id="published" min="1" placeholder="2004">
+          <input type="number"
+                 name="published"
+                 id="published"
+                 min="1"
+                 placeholder="2004"
+                 list="for-published">
           <select name="era" id="era" aria-labelledby="published-label">
             <option value="AD">AD</option>
             <option value="BC">BC</option>
           </select>
+          <datalist id="for-published"></datalist>
         </div>
       </div>
       <div class="language">
         <label for="language">Language</label>
-        <input type="text" name="language" id="language" placeholder="Russian">
+        <input type="text"
+               name="language"
+               id="language"
+               placeholder="Russian"
+               list="for-language">
+        <datalist id="for-language"></datalist>
       </div>
       <div class="genre">
         <label for="genre">Genre</label>
         <select name="genre" id="genre">
           <optgroup label="Fiction">
-            <option value="fantasy">Fantasy</option>
-            <option value="science fiction">Science Fiction</option>
-            <option value="dystopian">Dystopian</option>
-            <option value="action & adventure">Action & Adventure</option>
-            <option value="mystery">Mystery</option>
-            <option value="horror">Horror</option>
-            <option value="thriller & suspense">Thriller & Suspense</option>
-            <option value="historical fiction">Historical Fiction</option>
-            <option value="romance">Romance</option>
-            <option value="women’s fiction">Women’s Fiction</option>
-            <option value="lgbtq+">LGBTQ+</option>
-            <option value="contemporary fiction">Contemporary Fiction</option>
-            <option value="literary fiction">Literary Fiction</option>
-            <option value="magical realism">Magical Realism</option>
-            <option value="graphic novel">Graphic Novel</option>
-            <option value="short story">Short Story</option>    
-            <option value="young adult">Young Adult</option>
-            <option value="new adult ">New Adult</option>
-            <option value="children’s">Children’s</option>
+            <option value="Fantasy">Fantasy</option>
+            <option value="Science Fiction">Science Fiction</option>
+            <option value="Dystopian">Dystopian</option>
+            <option value="Action & Adventure">Action & Adventure</option>
+            <option value="Mystery">Mystery</option>
+            <option value="Horror">Horror</option>
+            <option value="Thriller & Suspense">Thriller & Suspense</option>
+            <option value="Historical Fiction">Historical Fiction</option>
+            <option value="Romance">Romance</option>
+            <option value="Women’s Fiction">Women’s Fiction</option>
+            <option value="LGBTQ+">LGBTQ+</option>
+            <option value="Contemporary Fiction">Contemporary Fiction</option>
+            <option value="Literary Fiction">Literary Fiction</option>
+            <option value="Magical Realism">Magical Realism</option>
+            <option value="Graphic Novel">Graphic Novel</option>
+            <option value="Short Story">Short Story</option>    
+            <option value="Young Adult">Young Adult</option>
+            <option value="New Adult ">New Adult</option>
+            <option value="Children’s">Children’s</option>
           </optgroup>
           <optgroup label="Non-fiction">
-            <option value="memoir & autobiography">Memoir & Autobiography</option>
-            <option value="biography">Biography</option>
-            <option value="food & drink">Food & Drink</option>
-            <option value="art & photography">Art & Photography</option>
-            <option value="self-help">Self-help</option>
-            <option value="history">History</option>
-            <option value="travel">Travel</option>
-            <option value="true crime">True Crime</option>
-            <option value="humor">Humor</option>
-            <option value="essays">Essays</option>
-            <option value="guide/how-to ">Guide/How-to </option>
-            <option value="religion & spirituality">Religion & Spirituality</option>
-            <option value="humanities & social sciences">Humanities & Social Sciences</option>
-            <option value="parenting & families">Parenting & Families</option>
-            <option value="science & technology" selected>Science & Technology</option>
-            <option value="children’s">Children’s</option>
+            <option value="Memoir & Autobiography">Memoir & Autobiography</option>
+            <option value="Biography">Biography</option>
+            <option value="Food & Drink">Food & Drink</option>
+            <option value="Art & Photography">Art & Photography</option>
+            <option value="Self-help">Self-help</option>
+            <option value="History">History</option>
+            <option value="Travel">Travel</option>
+            <option value="True Crime">True Crime</option>
+            <option value="Humor">Humor</option>
+            <option value="Essays">Essays</option>
+            <option value="Guide/How-to ">Guide/How-to </option>
+            <option value="Religion & Spirituality">Religion & Spirituality</option>
+            <option value="Humanities & Social sciences">Humanities & Social Sciences</option>
+            <option value="Parenting & Families">Parenting & Families</option>
+            <option value="Science & Technology" selected>Science & Technology</option>
+            <option value="Children’s">Children’s</option>
           </optgroup>
         </select>
       </div>
@@ -117,9 +138,9 @@
         <div class="status">
           <label for="status">Status</label>
           <select name="status" id="status">
-            <option value="read">Read</option>
-            <option value="reading">Reading</option>
-            <option value="to-read">To read</option>
+            <option value="Read">Read</option>
+            <option value="Reading">Reading</option>
+            <option value="To read">To read</option>
           </select>
         </div>
         <div class="rating">
@@ -139,7 +160,10 @@
           </select>
         </div>
       </div>
-      <button type="button" class="add-btn">Add</button>
+      <div class="add-reset">
+        <button type="submit" class="add-btn">Add</button>
+        <button type="reset" class="reset-btn">Reset</button>
+      </div>
     </form> 
   </body>
 </html>
