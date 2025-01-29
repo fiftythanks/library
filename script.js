@@ -38,6 +38,7 @@ function fillTable() {
 
     const number = document.createElement("td");
     number.classList.add("order");
+    number.position = i;
     number.textContent = `${i + 1}`;
     row.appendChild(number);
 
@@ -80,6 +81,17 @@ function fillTable() {
     const removeBtn = document.createElement("button");
     removeBtn.classList.add("remove-btn");
     removeBtn.textContent = "remove";
+    removeBtn.addEventListener("click", () => {
+      myLibrary.splice(number.position - 1, 1);
+      console.log(`Number position: ${number.position}`);
+      let position = number.position;
+      row.remove();
+      for (let i = position; i < myLibrary.length; i++) {
+        console.log(i);
+        table.children[i].querySelector(".order").textContent = `${i + 1}`;
+        table.children[i].querySelector(".order").position--;
+      }
+    });
     rating.appendChild(removeBtn);
 
     row.appendChild(rating);
@@ -87,3 +99,4 @@ function fillTable() {
     table.appendChild(row); 
   }
 }
+

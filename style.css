@@ -85,7 +85,7 @@ col {
   }
 
   &.author {
-    width: calc(15ch + var(--horizontal-padding));
+    width: calc(20ch + var(--horizontal-padding));
   }
 
   &.published {
