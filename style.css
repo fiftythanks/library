@@ -89,7 +89,7 @@ col {
   }
 
   &.published {
-    width: calc(7ch + var(--horizontal-padding));
+    width: calc(9ch + var(--horizontal-padding));
   }
 
   &.language {
@@ -140,4 +140,27 @@ td:last-child {
 
 .add-btn {
   padding: 0.3rem var(--horizontal-padding);
+  margin-top: 1rem;
 }
+
+form.add {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+div:is(.title, .author, .language, .genre, .status, .rating) {
+  display: flex;
+  flex-direction: column;
+}
+
+div.status-rating {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.rating option {
+  text-align: center;
+}
+

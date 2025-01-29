@@ -1,9 +1,19 @@
 const myLibrary = [];
 
-function Book(title="", author="", published="", language="", genre="", status="", rating=0) {
+function Book(
+              title = "",
+              author = "",
+              published = 0,
+              era = "",
+              language = "",
+              genre = "",
+              status = "",
+              rating = 0
+            ) {
   this.title = title;
   this.author = author;
   this.published = published;
+  this.era = era;
   this.language = language;
   this.genre = genre;
   this.status = status;
@@ -14,6 +24,7 @@ function addBookToLibrary(
                           title,
                           author,
                           published,
+                          era,
                           language,
                           genre,
                           status,
@@ -23,6 +34,7 @@ function addBookToLibrary(
                          title,
                          author,
                          published,
+                         era, 
                          language,
                          genre,
                          status,
@@ -54,7 +66,9 @@ function fillTable() {
 
     const published = document.createElement("td");
     published.classList.add("published");
-    published.textContent = myLibrary[i].published.toString();
+    if (myLibrary[i].published !== 0) {
+      published.textContent = `${myLibrary[i].published} ${myLibrary[i].era}`;  
+    }
     row.appendChild(published);
 
     const language = document.createElement("td");
@@ -83,11 +97,9 @@ function fillTable() {
     removeBtn.textContent = "remove";
     removeBtn.addEventListener("click", () => {
       myLibrary.splice(number.position - 1, 1);
-      console.log(`Number position: ${number.position}`);
       let position = number.position;
       row.remove();
       for (let i = position; i < myLibrary.length; i++) {
-        console.log(i);
         table.children[i].querySelector(".order").textContent = `${i + 1}`;
         table.children[i].querySelector(".order").position--;
       }
@@ -96,7 +108,10 @@ function fillTable() {
 
     row.appendChild(rating);
 
-    table.appendChild(row); 
+    table.appendChild(row);
   }
 }
 
+function addBookWithBtn() {
+  
+}
