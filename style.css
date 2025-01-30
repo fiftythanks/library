@@ -121,7 +121,7 @@ td.title {
   font-style: italic;
 }
 
-:is(th, td).rating {
+:is(th, td):is(.rating, .published) {
   text-align: right;
 }
 

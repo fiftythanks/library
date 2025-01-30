@@ -335,3 +335,78 @@ newBookForm.addEventListener("submit", (e) => {
     dataListLanguage.appendChild(option);
   }
 });
+
+function createDefaultRows() {
+  createRowWithBtn(
+    "Математический анализ I",
+    "Vladimir Antonovich Zorich", 
+    2004,
+    "AD",
+    "Russian", 
+    "Science & Technology", 
+    "Read", 
+    10
+  );
+  createRowWithBtn(
+    "Механика",
+    "Dmitry Vasilievich Sivuhin", 
+    2017,
+    "AD",
+    "Russian", 
+    "Science & Technology", 
+    "Read", 
+    9
+  );
+  createRowWithBtn(
+    "Лекции по аналитической геометрии", 
+    "Pavel Sergeevich Alexandrov", 
+    2020,
+    "AD",
+    "Russian",
+    "Science & Technology", 
+    "Read", 
+    10
+  );
+  createRowWithBtn(
+    "English Grammar in Use", 
+    "Raymond Murphy", 
+    1985,
+    "AD",
+    "English", 
+    "Humanities & Social sciences", 
+    "Read", 
+    10
+  );
+  createRowWithBtn(
+    "Enchiridion", 
+    "Epictetus", 
+    125,
+    "AD",
+    "English", 
+    "Humanities & Social sciences", 
+    "Read", 
+    10
+  );
+  createRowWithBtn(
+    "Братья Карамазовы", 
+    "Fyodor Mikhailovich Dostoevsky", 
+    1880,
+    "AD",
+    "Russian", 
+    "Literary Fiction", 
+    "Read", 
+    10
+  );
+  createRowWithBtn(
+    "JavaScript: The Definitive Guide", 
+    "David Flanagan", 
+    2020,
+    "AD",
+    "English", 
+    "Science & Technology", 
+    "To read", 
+    0
+  );
+}
+
+createDefaultRows();
