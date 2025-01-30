@@ -103,6 +103,20 @@ function createRow(i) {
   const language = document.createElement("td");
   language.classList.add("language");
   language.textContent = myLibrary[i].language;
+
+  // Adds user edit functionality
+  language.contentEditable = "plaintext-only";
+  let shouldFireChangeLanguage = false;
+  language.addEventListener("input", () => {
+    shouldFireChangeLanguage = true; // makes myLibrary change not every time the cell gets and loses focus but only when the content is edited
+  });
+  language.addEventListener("blur", () => {
+    if (shouldFireChangeLanguage === true) {
+      shouldFireChangeLanguage = false;
+      myLibrary[number.position].language = language.textContent;
+    }
+  });
+
   row.appendChild(language);
 
   const genre = document.createElement("td");
