@@ -81,28 +81,52 @@ function createRow(i) {
   });
 
   // Move focus to the next focusable cell in the row if the current cell isn't the one before the remove button
-  title.addEventListener("keyup", (e) => {
-    if (e.key === "Enter") {
-      let focusNextCell = title.focusNextCell;
-      if (focusNextCell === true) {
-        const rowChildren = Array.from(row.children);
-        let index = rowChildren.indexOf(title);
-        let currentCell = title;
-        let nextCell = rowChildren[index + 1];
-        while (focusNextCell === true) {
-          if (nextCell.tabIndex >= 0) {
-            nextCell.focus();
-            focusNextCell = false;
+  function moveToNextCell(currentCell) {
+    let focusNextCell = currentCell.focusNextCell;
+    if (focusNextCell === true) {
+      const rowChildren = Array.from(row.children);
+      let index = rowChildren.indexOf(currentCell);
+      let nextCell = rowChildren[index + 1];
+      while (focusNextCell === true) {
+        if (nextCell.tabIndex >= 0) {
+          nextCell.focus();
+          focusNextCell = false;
+        }
+        index++;
+        currentCell = nextCell;
+        nextCell = rowChildren[index + 1];
+        }
+    } else {
+      currentCell.blur();
+    }
+  }
+
+  function addNavigation(cell) {
+    function addControlNavigation(e) {
+      if (e.key === "Control" && e.repeat === false) {
+        // *Button here is any other button pressed with control button
+        function addControlButtonNavigation(e) { 
+          switch (e.key) {
+            case "Enter":
+              moveToNextCell(cell);
+              break;
           }
-          index++;
-          currentCell = nextCell;
-          nextCell = rowChildren[index + 1];
+        }
+        cell.addEventListener("keyup", addControlButtonNavigation);
+
+        function removeControlButtonNavigation(e) {
+          if (e.key === "Control") {
+            cell.removeEventListener("keyup", addControlButtonNavigation);
           }
-      } else {
-        title.blur();
+        }
+        document.addEventListener("keyup", removeControlButtonNavigation);
       }
     }
-  });
+
+    cell.addEventListener("keydown", addControlNavigation);
+  }               
+
+  addNavigation(title);
   
   row.appendChild(title);
 
@@ -132,28 +156,7 @@ function createRow(i) {
   });
 
   // Move focus to the next focusable cell in the row if the current cell isn't the one before the remove button
-  author.addEventListener("keyup", (e) => {
-    if (e.key === "Enter") {
-      let focusNextCell = author.focusNextCell;
-      if (focusNextCell === true) {
-        const rowChildren = Array.from(row.children);
-        let index = rowChildren.indexOf(author);
-        let currentCell = author;
-        let nextCell = rowChildren[index + 1];
-        while (focusNextCell === true) {
-          if (nextCell.tabIndex >= 0) {
-            nextCell.focus();
-            focusNextCell = false;
-          }
-          index++;
-          currentCell = nextCell;
-          nextCell = rowChildren[index + 1];
-          }
-      } else {
-        author.blur();
-      }
-    }
-  });
+  addNavigation(author);
 
   row.appendChild(author);
 
@@ -189,10 +192,9 @@ function createRow(i) {
     if (e.key === "Enter") e.preventDefault();
   });
 
-  // Blur when Enter/Return key pressed
-  language.addEventListener("keyup", (e) => {
-    if (e.key === "Enter") language.blur();
-  });
+  // Move focus to the next focusable cell in the row if the current cell isn't the one before the remove button
+  addNavigation(language);  
+
 
   row.appendChild(language);
 
