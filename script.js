@@ -104,6 +104,8 @@ function createRow(i) {
   function addNavigation(cell) {
     function addControlNavigation(e) {
       if (e.key === "Control" && e.repeat === false) {
+        cell.removeEventListener("keyup", blurOnEnter);
+
         // *Button here is any other button pressed with control button
         function addControlButtonNavigation(e) { 
           switch (e.key) {
@@ -117,12 +119,16 @@ function createRow(i) {
         function removeControlButtonNavigation(e) {
           if (e.key === "Control") {
             cell.removeEventListener("keyup", addControlButtonNavigation);
+            cell.addEventListener("keyup", blurOnEnter);
           }
         }
         document.addEventListener("keyup", removeControlButtonNavigation);
       }
     }
-
+    function blurOnEnter(e) {
+      if (e.key === "Enter") cell.blur();
+    }
+    cell.addEventListener("keyup", blurOnEnter);
     cell.addEventListener("keydown", addControlNavigation);
   }               
 
