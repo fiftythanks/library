@@ -68,9 +68,18 @@ function createRow(i) {
     if (shouldFireChangeTitle === true) {
       shouldFireChangeTitle = false;
       myLibrary[number.position].title = title.textContent;
-      console.log(myLibrary[number.position].title);
     }
   });
+
+  title.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") e.preventDefault();
+  })
+
+  // Blur when Enter/Return key pressed
+  title.addEventListener("keyup", (e) => {
+    if (e.key === "Enter") title.blur();
+  })
+  
 
   row.appendChild(title);
 
