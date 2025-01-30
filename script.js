@@ -80,17 +80,16 @@ function createRow(i) {
     if (e.key === "Enter") e.preventDefault();
   });
 
+  // Move focus to the next focusable cell in the row if the current cell isn't the one before the remove button
   title.addEventListener("keyup", (e) => {
     if (e.key === "Enter") {
-
-      // Move focus to the next focusable cell in the row if the current cell isn't the one before the remove
       let focusNextCell = title.focusNextCell;
-      const rowChildren = Array.from(row.children);
-      let index = rowChildren.indexOf(title);
-      let currentCell = title;
-      let nextCell = rowChildren[index + 1];
-      while (focusNextCell === true) {
-        if (nextCell.focusNextCell === true) {
+      if (focusNextCell === true) {
+        const rowChildren = Array.from(row.children);
+        let index = rowChildren.indexOf(title);
+        let currentCell = title;
+        let nextCell = rowChildren[index + 1];
+        while (focusNextCell === true) {
           if (nextCell.tabIndex >= 0) {
             nextCell.focus();
             focusNextCell = false;
@@ -98,15 +97,13 @@ function createRow(i) {
           index++;
           currentCell = nextCell;
           nextCell = rowChildren[index + 1];
-        } else {
-          title.blur();
-          focusNextCell = false;
-        }
+          }
+      } else {
+        title.blur();
       }
     }
   });
   
-
   row.appendChild(title);
 
   const author = document.createElement("td");
@@ -134,10 +131,29 @@ function createRow(i) {
     if (e.key === "Enter") e.preventDefault();
   });
 
-  // Blur when Enter/Return key pressed
+  // Move focus to the next focusable cell in the row if the current cell isn't the one before the remove button
   author.addEventListener("keyup", (e) => {
-    if (e.key === "Enter") author.blur();
-  }); 
+    if (e.key === "Enter") {
+      let focusNextCell = author.focusNextCell;
+      if (focusNextCell === true) {
+        const rowChildren = Array.from(row.children);
+        let index = rowChildren.indexOf(author);
+        let currentCell = author;
+        let nextCell = rowChildren[index + 1];
+        while (focusNextCell === true) {
+          if (nextCell.tabIndex >= 0) {
+            nextCell.focus();
+            focusNextCell = false;
+          }
+          index++;
+          currentCell = nextCell;
+          nextCell = rowChildren[index + 1];
+          }
+      } else {
+        author.blur();
+      }
+    }
+  });
 
   row.appendChild(author);
 
