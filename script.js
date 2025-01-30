@@ -58,6 +58,8 @@ function createRow(i) {
   const title = document.createElement("td");
   title.spellcheck = false;
   title.classList.add("title");
+  title.focusNextCell = true;
+  title.tabIndex = 0;
   title.textContent = myLibrary[i].title;
 
   // Adds user edit functionality
@@ -78,10 +80,31 @@ function createRow(i) {
     if (e.key === "Enter") e.preventDefault();
   });
 
-  // Blur when Enter/Return key pressed
   title.addEventListener("keyup", (e) => {
-    if (e.key === "Enter") title.blur();
-  }); 
+    if (e.key === "Enter") {
+
+      // Move focus to the next focusable cell in the row if the current cell isn't the one before the remove
+      let focusNextCell = title.focusNextCell;
+      const rowChildren = Array.from(row.children);
+      let index = rowChildren.indexOf(title);
+      let currentCell = title;
+      let nextCell = rowChildren[index + 1];
+      while (focusNextCell === true) {
+        if (nextCell.focusNextCell === true) {
+          if (nextCell.tabIndex >= 0) {
+            nextCell.focus();
+            focusNextCell = false;
+          }
+          index++;
+          currentCell = nextCell;
+          nextCell = rowChildren[index + 1];
+        } else {
+          title.blur();
+          focusNextCell = false;
+        }
+      }
+    }
+  });
   
 
   row.appendChild(title);
@@ -89,6 +112,8 @@ function createRow(i) {
   const author = document.createElement("td");
   author.spellcheck = false;
   author.classList.add("author");
+  author.focusNextCell = true;
+  author.tabIndex = 0;
   author.textContent = myLibrary[i].author;
 
   // Adds user edit functionality
@@ -118,6 +143,7 @@ function createRow(i) {
 
   const published = document.createElement("td");
   published.classList.add("published");
+  published.focusNextCell = true;
   if (myLibrary[i].published) {
     published.textContent = `${myLibrary[i].published} ${myLibrary[i].era}`;  
   }
@@ -125,6 +151,8 @@ function createRow(i) {
 
   const language = document.createElement("td");
   language.classList.add("language");
+  language.focusNextCell = true;
+  language.tabIndex = 0;
   language.textContent = myLibrary[i].language;
 
   // Adds user edit functionality
@@ -149,20 +177,24 @@ function createRow(i) {
   language.addEventListener("keyup", (e) => {
     if (e.key === "Enter") language.blur();
   });
+
   row.appendChild(language);
 
   const genre = document.createElement("td");
   genre.classList.add("genre");
+  genre.focusNextCell = true;
   genre.textContent = myLibrary[i].genre;
   row.appendChild(genre);
 
   const status = document.createElement("td");
   status.classList.add("status");
+  status.focusNextCell = true;
   status.textContent = myLibrary[i].status;
   row.appendChild(status);
 
   const rating = document.createElement("td");
   rating.classList.add("rating");
+  rating.focusNextCell = false;
   if (myLibrary[i].rating !== 0) {
     rating.textContent = `${myLibrary[i].rating}/10`;   
   }
