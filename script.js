@@ -62,6 +62,19 @@ function createRow(i) {
   const author = document.createElement("td");
   author.classList.add("author");
   author.textContent = myLibrary[i].author;
+
+  // Adds user edit functionality
+  author.contentEditable = "plaintext-only";
+  let shouldFireChangeAuthor = false;
+  author.addEventListener("input", () => {
+    shouldFireChangeAuthor = true;
+  });
+  author.addEventListener("blur", () => {
+    shouldFireChangeAuthor = false;
+    myLibrary[number.position].author = author.textContent;
+    console.log(myLibrary[number.position].author);
+  });
+
   row.appendChild(author);
 
   const published = document.createElement("td");
@@ -96,7 +109,7 @@ function createRow(i) {
   removeBtn.classList.add("remove-btn");
   removeBtn.textContent = "Remove";
   removeBtn.addEventListener("click", () => {
-    myLibrary.splice(number.position - 1, 1);
+    myLibrary.splice(number.position, 1);
     let position = number.position;
     row.remove();
     for (let i = position; i < myLibrary.length; i++) {
