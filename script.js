@@ -57,6 +57,21 @@ function createRow(i) {
   const title = document.createElement("td");
   title.classList.add("title");
   title.textContent = myLibrary[i].title;
+
+  // Adds user edit functionality
+  title.contentEditable = "plaintext-only";
+  let shouldFireChangeTitle = false;
+  title.addEventListener("input", () => {
+    shouldFireChangeTitle = true; // makes myLibrary change not every time the cell gets and loses focus but only when the content is edited
+  });
+  title.addEventListener("blur", () => {
+    if (shouldFireChangeTitle === true) {
+      shouldFireChangeTitle = false;
+      myLibrary[number.position].title = title.textContent;
+      console.log(myLibrary[number.position].title);
+    }
+  });
+
   row.appendChild(title);
 
   const author = document.createElement("td");
@@ -67,12 +82,13 @@ function createRow(i) {
   author.contentEditable = "plaintext-only";
   let shouldFireChangeAuthor = false;
   author.addEventListener("input", () => {
-    shouldFireChangeAuthor = true;
+    shouldFireChangeAuthor = true; // makes myLibrary change not every time the cell gets and loses focus but only when the content is edited
   });
   author.addEventListener("blur", () => {
-    shouldFireChangeAuthor = false;
-    myLibrary[number.position].author = author.textContent;
-    console.log(myLibrary[number.position].author);
+    if (shouldFireChangeAuthor === true) {
+      shouldFireChangeAuthor = false;
+      myLibrary[number.position].author = author.textContent;
+    }
   });
 
   row.appendChild(author);
