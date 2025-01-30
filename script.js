@@ -45,6 +45,7 @@ function addBookToLibrary(
 
 function createRow(i) { 
   if (i === undefined) i = myLibrary.length - 1;
+  const entireTable = document.querySelector("table");
   const table = document.querySelector("tbody");
   const row = document.createElement("tr");
 
@@ -71,14 +72,15 @@ function createRow(i) {
     }
   });
 
+  // Prevent user from entering return escape characters
   title.addEventListener("keydown", (e) => {
     if (e.key === "Enter") e.preventDefault();
-  })
+  });
 
   // Blur when Enter/Return key pressed
   title.addEventListener("keyup", (e) => {
     if (e.key === "Enter") title.blur();
-  })
+  }); 
   
 
   row.appendChild(title);
@@ -99,6 +101,16 @@ function createRow(i) {
       myLibrary[number.position].author = author.textContent;
     }
   });
+
+  // Prevent user from entering return escape characters
+  author.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") e.preventDefault();
+  });
+
+  // Blur when Enter/Return key pressed
+  author.addEventListener("keyup", (e) => {
+    if (e.key === "Enter") author.blur();
+  }); 
 
   row.appendChild(author);
 
@@ -125,6 +137,16 @@ function createRow(i) {
       myLibrary[number.position].language = language.textContent;
     }
   });
+
+  // Prevent user from entering return escape characters
+  language.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") e.preventDefault();
+  });
+
+  // Blur when Enter/Return key pressed
+  language.addEventListener("keyup", (e) => {
+    if (e.key === "Enter") language.blur();
+  }); 
 
   row.appendChild(language);
 
