@@ -56,6 +56,7 @@ function createRow(i) {
   row.appendChild(number);
 
   const title = document.createElement("td");
+  title.spellcheck = false;
   title.classList.add("title");
   title.textContent = myLibrary[i].title;
 
@@ -86,6 +87,7 @@ function createRow(i) {
   row.appendChild(title);
 
   const author = document.createElement("td");
+  author.spellcheck = false;
   author.classList.add("author");
   author.textContent = myLibrary[i].author;
 
@@ -146,8 +148,7 @@ function createRow(i) {
   // Blur when Enter/Return key pressed
   language.addEventListener("keyup", (e) => {
     if (e.key === "Enter") language.blur();
-  }); 
-
+  });
   row.appendChild(language);
 
   const genre = document.createElement("td");

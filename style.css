@@ -146,7 +146,7 @@ td:last-child {
 div.add-reset {
   display: flex;
   gap: 1rem;
-  justify-content: center;
+  justify-content: center;            
 }
 
 form.add {
