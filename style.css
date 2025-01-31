@@ -93,7 +93,7 @@ col {
   }
 
   &.language {
-    width: calc(15ch + var(--horizontal-padding));  
+    width: calc(15ch + var(--horizontal-padding));
   }
 
   &.genre {
@@ -125,8 +125,13 @@ td.title {
   text-align: right;
 }
 
-td:last-child {
+
+
+td.rating {
   position: relative;
+  & option:not([value="0"]) {
+    text-align: right;
+  }
 }
 
 .remove-btn {

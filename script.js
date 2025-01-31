@@ -218,10 +218,55 @@ function createRow(i) {
 
   const rating = document.createElement("td");
   rating.classList.add("rating");
-  rating.focusNextCell = false;
-  if (myLibrary[i].rating !== 0) {
-    rating.textContent = `${myLibrary[i].rating}/10`;   
-  }
+  const rate = document.createElement("select");
+  rate.name = "rating";
+  const noStar = document.createElement("option");
+  noStar.value = "0";
+  noStar.textContent = "★";
+  const oneStar = document.createElement("option");
+  oneStar.value = "1";
+  oneStar.textContent = "1★";
+  const twoStars = document.createElement("option");
+  twoStars.value = "2";
+  twoStars.textContent = "2★";
+  const threeStars = document.createElement("option");
+  threeStars.value = "3";
+  threeStars.textContent = "3★";
+  const fourStars = document.createElement("option");
+  fourStars.value = "4";
+  fourStars.textContent = "4★";
+  const fiveStars = document.createElement("option");
+  fiveStars.value = "5";
+  fiveStars.textContent = "5★";
+  const sixStars = document.createElement("option");
+  sixStars.value = "6";
+  sixStars.textContent = "6★";
+  const sevenStars = document.createElement("option");
+  sevenStars.value = "7";
+  sevenStars.textContent = "7★";
+  const eightStars = document.createElement("option");
+  eightStars.value = "8";
+  eightStars.textContent = "8★";
+  const nineStars = document.createElement("option");
+  nineStars.value = "9";
+  nineStars.textContent = "9★";
+  const tenStars = document.createElement("option");
+  tenStars.value = "10";
+  tenStars.textContent = "10★";    
+
+  rate.appendChild(noStar);
+  rate.appendChild(oneStar);
+  rate.appendChild(twoStars);
+  rate.appendChild(threeStars);
+  rate.appendChild(fourStars);
+  rate.appendChild(fiveStars);
+  rate.appendChild(sixStars);
+  rate.appendChild(sevenStars);
+  rate.appendChild(eightStars);
+  rate.appendChild(nineStars);
+  rate.appendChild(tenStars);
+
+  rating.appendChild(rate); 
 
   const removeBtn = document.createElement("button");
   removeBtn.classList.add("remove-btn");
@@ -409,4 +454,4 @@ function createDefaultRows() {
   );
 }
 
-createDefaultRows();
+createDefaultRows();    
