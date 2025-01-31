@@ -57,8 +57,6 @@ function createRow(i) {
   const title = document.createElement("td");
   title.spellcheck = false;
   title.classList.add("title");
-  title.focusNextCell = true;
-  title.tabIndex = 0;
   title.textContent = myLibrary[i].title;
 
   // Adds user edit functionality
@@ -74,72 +72,11 @@ function createRow(i) {
     }
   });
 
-  // Prevent user from entering return escape characters
-  title.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") e.preventDefault();
-  });
-
-  // Move focus to the next focusable cell in the row if the current cell isn't the one before the remove button
-  function moveToNextCell(currentCell) {
-    let focusNextCell = currentCell.focusNextCell;
-    if (focusNextCell === true) {
-      const rowChildren = Array.from(row.children);
-      let index = rowChildren.indexOf(currentCell);
-      let nextCell = rowChildren[index + 1];
-      while (focusNextCell === true) {
-        if (nextCell.tabIndex >= 0) {
-          nextCell.focus();
-          focusNextCell = false;
-        }
-        index++;
-        currentCell = nextCell;
-        nextCell = rowChildren[index + 1];
-        }
-    } else {
-      currentCell.blur();
-    }
-  }
-
-  function addNavigation(cell) {
-    function addControlNavigation(e) {
-      if (e.key === "Control" && e.repeat === false) {
-        cell.removeEventListener("keyup", blurOnEnter);
-
-        // *Button here is any other button pressed with control button
-        function addControlButtonNavigation(e) { 
-          switch (e.key) {
-            case "Enter":
-              moveToNextCell(cell);
-              break;
-          }
-        }
-        cell.addEventListener("keyup", addControlButtonNavigation);
-
-        function removeControlButtonNavigation(e) {
-          if (e.key === "Control") {
-            cell.removeEventListener("keyup", addControlButtonNavigation);
-            cell.addEventListener("keyup", blurOnEnter);
-          }
-        }
-        document.addEventListener("keyup", removeControlButtonNavigation);
-      }
-    }
-    function blurOnEnter(e) {
-      if (e.key === "Enter") cell.blur();
-    }
-    cell.addEventListener("keyup", blurOnEnter);
-    cell.addEventListener("keydown", addControlNavigation);
-  }               
-
-  addNavigation(title);
-  
   row.appendChild(title);
 
   const author = document.createElement("td");
   author.spellcheck = false;
   author.classList.add("author");
-  author.focusNextCell = true;
-  author.tabIndex = 0;
   author.textContent = myLibrary[i].author;
 
   // Adds user edit functionality
@@ -155,19 +92,10 @@ function createRow(i) {
     }
   });
 
-  // Prevent user from entering return escape characters
-  author.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") e.preventDefault();
-  });
-
-  // Move focus to the next focusable cell in the row if the current cell isn't the one before the remove button
-  addNavigation(author);
-
   row.appendChild(author);
 
   const published = document.createElement("td");
   published.classList.add("published");
-  published.focusNextCell = true;
   if (myLibrary[i].published) {
     published.textContent = `${myLibrary[i].published} ${myLibrary[i].era}`;  
   }
@@ -175,8 +103,6 @@ function createRow(i) {
 
   const language = document.createElement("td");
   language.classList.add("language");
-  language.focusNextCell = true;
-  language.tabIndex = 0;
   language.textContent = myLibrary[i].language;
 
   // Adds user edit functionality
@@ -192,32 +118,20 @@ function createRow(i) {
     }
   });
 
-  // Prevent user from entering return escape characters
-  language.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") e.preventDefault();
-  });
-
-  // Move focus to the next focusable cell in the row if the current cell isn't the one before the remove button
-  addNavigation(language);  
-
   row.appendChild(language);
 
   const genre = document.createElement("td");
   genre.classList.add("genre");
-  genre.focusNextCell = true;
   genre.textContent = myLibrary[i].genre;
   row.appendChild(genre);
 
   const status = document.createElement("td");
   status.classList.add("status");
-  status.focusNextCell = true;
   status.textContent = myLibrary[i].status;
   row.appendChild(status);
 
   const rating = document.createElement("td");
-  rating.classList.add("rating");
-  rating.focusNextCell = false;
-  rating.tabIndex = 0;
+  rating.classList.add("rating"); 
   const rate = document.createElement("select");
   rate.name = "rating";
   const noStar = document.createElement("option");
@@ -267,7 +181,6 @@ function createRow(i) {
   rate.appendChild(tenStars);
 
   rating.appendChild(rate); 
-  addNavigation(rating);
   row.appendChild(rating);
 
   const removeCell = document.createElement("td");
@@ -286,6 +199,16 @@ function createRow(i) {
 
   removeCell.appendChild(removeBtn);
   row.appendChild(removeCell);
+
+  // No return escape characters in cell edits
+  function preventEnterDefault(cell) {
+    cell.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") e.preventDefault();
+    });
+  }
+  for (let cell of Array.from(row.children)) {
+    if (cell.isContentEditable) preventEnterDefault(cell);
+  }
 
   table.appendChild(row);
 }
