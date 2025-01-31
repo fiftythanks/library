@@ -352,6 +352,7 @@ function createRow(i) {
   rate.appendChild(nineStars);
   rate.appendChild(tenStars);
 
+  rate.value = myLibrary[i].rating.toString();
   rate.addEventListener("change", () => {
     myLibrary[number.position].rating = Number.parseInt(rate.value);
   });
