@@ -96,9 +96,42 @@ function createRow(i) {
 
   const published = document.createElement("td");
   published.classList.add("published");
-  if (myLibrary[i].published) {
-    published.textContent = `${myLibrary[i].published} ${myLibrary[i].era}`;  
-  }
+  const publishedWrapper = document.createElement("div");
+  publishedWrapper.classList.add("published-wrapper");
+  const publishedYear = document.createElement("input");
+  publishedYear.classList.add("published");
+  publishedYear.type = "number";
+  publishedYear.min = "1";
+  publishedYear.max = "9999";
+  const publishedEra = document.createElement("select");
+  publishedEra.classList.add("published"  );
+  const publishedEraCurrent = document.createElement("option");
+  publishedEraCurrent.classList.add("published");
+  publishedEraCurrent.value = "AD";
+  publishedEraCurrent.textContent = "AD";
+  const publishedEraBeforeChrist = document.createElement("option");
+  publishedEraBeforeChrist.classList.add("published");
+  publishedEraBeforeChrist.value = "BC";
+  publishedEraBeforeChrist.textContent = "BC";
+  publishedEra.appendChild(publishedEraCurrent);
+  publishedEra.appendChild(publishedEraBeforeChrist);
+
+  publishedYear.value = myLibrary[i].published.toString();
+  publishedYear.addEventListener("change", (e) => {
+    if (!publishedYear.validity.valid) {
+      publishedYear.value = myLibrary[i].published.toString();
+    } else {
+      myLibrary[i].published = Number.parseInt(publishedYear.value);
+    }
+  });
+  
+  publishedEra.value = myLibrary[i].era;
+
+  publishedWrapper.appendChild(publishedYear);
+  publishedWrapper.appendChild(publishedEra);
+
+  published.appendChild(publishedWrapper);
+
   row.appendChild(published);
 
   const language = document.createElement("td");

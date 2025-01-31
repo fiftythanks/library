@@ -88,10 +88,6 @@ col {
     width: calc(20ch + var(--horizontal-padding));
   }
 
-  &.published {
-    width: calc(9ch + var(--horizontal-padding));
-  }
-
   &.language {
     width: calc(15ch + var(--horizontal-padding));
   }
@@ -121,7 +117,19 @@ td.title {
   font-style: italic;
 }
 
-:is(th, td):is(.rating, .published) {
+div.published-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+input.published {
+  width: calc(9ch + var(--horizontal-padding));
+  text-align: right;
+}
+
+:is(th, td).rating {
   text-align: right;
 } 
 
