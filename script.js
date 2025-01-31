@@ -589,4 +589,34 @@ function createDefaultRows() {
   );
 }
 
-createDefaultRows();    
+createDefaultRows();   
+
+function createBlankRow() {
+  createRowWithBtn(
+    "",
+    "",
+    "",
+    "AD",
+    "",
+    "Science & Technology",
+    "Read",
+    0
+  );
+}
+
+function createBlankRowOnEnter(e) {
+  if (e.code === "Enter") {
+    createBlankRow(); 
+  } 
+}
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Control" && e.repeat === false) {
+    document.addEventListener("keyup", createBlankRowOnEnter); 
+  }
+});
+document.addEventListener("keyup", (e) => {
+  if (e.key === "Control") {
+    document.removeEventListener("keyup", createBlankRowOnEnter);
+  }
+});
