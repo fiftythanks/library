@@ -155,7 +155,146 @@ function createRow(i) {
 
   const genre = document.createElement("td");
   genre.classList.add("genre");
-  genre.textContent = myLibrary[i].genre;
+  const genreList = document.createElement("select");
+  genreList.classList.add("genre");
+  const fiction = document.createElement("optgroup");
+  fiction.label = "Fiction";
+  let fictionGenres = [
+    "Fantasy",
+    "Science Fiction",
+    "Dystopian",
+    "Action & Adventure",
+    "Mystery",
+    "Horror",
+    "Thriller & Suspense",
+    "Historical",
+    "Romance",
+    "Women‘s Fiction",
+    "LGBTQ+",
+    "Contemporary Fiction",
+    "Literary Fiction",
+    "Magical Realism",
+    "Graphic Novel",
+    "Short Story",
+    "Young Adult",
+    "New Adult",
+    "Children‘s"
+  ];
+  const fantasy = document.createElement("option");
+  const scifi = document.createElement("option");
+  const dystopian = document.createElement("option");
+  const actionAdventure = document.createElement("option");
+  const mystery = document.createElement("option");
+  const horror = document.createElement("option");
+  const thrillerSuspense = document.createElement("option");
+  const hifi = document.createElement("option");
+  const romance = document.createElement("option");
+  const women = document.createElement("option");
+  const lgbt = document.createElement("option");
+  const contfi = document.createElement("option");
+  const litfi = document.createElement("option");
+  const magReal = document.createElement("option");
+  const graphNov = document.createElement("option");
+  const shortStory = document.createElement("option");
+  const young = document.createElement("option");
+  const newAdult = document.createElement("option");
+  const children = document.createElement("option");
+
+  let fictionGenreVars = [
+    fantasy,
+    scifi,
+    dystopian,
+    actionAdventure,
+    mystery,
+    horror,
+    thrillerSuspense,
+    hifi,
+    romance,
+    women,
+    lgbt,
+    contfi,
+    litfi,
+    magReal,
+    graphNov,
+    shortStory,
+    young,
+    newAdult,
+    children
+  ];
+  for (let i = 0; i < fictionGenres.length; i++) {
+    fictionGenreVars[i].value = fictionGenres[i];
+    fictionGenreVars[i].textContent = fictionGenres[i];
+    fiction.appendChild(fictionGenreVars[i]);
+  }
+  genreList.appendChild(fiction);
+
+  const nonfiction = document.createElement("optgroup");
+  nonfiction.label = "Non-fiction";
+  let nonfictionGenres = [
+    "Memoir & Autobiography",
+    "Biography",
+    "Food & Drink",
+    "Art & Photography",
+    "Self-help",
+    "History",
+    "Travel",
+    "True Crime",
+    "Humor",
+    "Essays",
+    "Guide/How-to",
+    "Religion & Spirituality",
+    "Humanities & Social sciences",
+    "Parenting & Families",
+    "Science & Technology",
+    "Children‘s"
+  ];
+  const memo = document.createElement("option");
+  const bio = document.createElement("option");
+  const food = document.createElement("option");
+  const art = document.createElement("option");
+  const sHelp = document.createElement("option");
+  const hist = document.createElement("option");
+  const trav = document.createElement("option");
+  const crime = document.createElement("option");
+  const hum = document.createElement("option");
+  const ess = document.createElement("option");
+  const guide = document.createElement("option");
+  const rel = document.createElement("option");
+  const humSoc = document.createElement("option");
+  const parent = document.createElement("option");
+  const sciTech = document.createElement("option");
+  const childs = document.createElement("option");
+  
+  let nonfictionGenreVars = [
+    memo,
+    bio,
+    food,
+    art,
+    sHelp,
+    hist,
+    trav,
+    crime,
+    hum,
+    ess,
+    guide,
+    rel,
+    humSoc,
+    parent,
+    sciTech,
+    childs
+  ];
+  for (let i = 0; i < nonfictionGenres.length; i++) {
+    nonfictionGenreVars[i].value = nonfictionGenres[i];
+    nonfictionGenreVars[i].textContent = nonfictionGenres[i];
+    nonfiction.appendChild(nonfictionGenreVars[i]);
+  }
+  genreList.appendChild(nonfiction);
+  genreList.value = myLibrary[i].genre;
+  genreList.addEventListener("change", () => {
+    myLibrary[i].genre = genreList.value;
+  });
+
+  genre.appendChild(genreList);
   row.appendChild(genre);
 
   const status = document.createElement("td");
