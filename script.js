@@ -3,21 +3,23 @@ const myLibrary = [];
 function Book(
   title = "",
   author = "",
-  published = 0,
-  era = "",
+  published = "",
+  era = "AD",
   language = "",
-  genre = "",
-  status = "",
+  genre = "Science & Technology",
+  status = "Read",
   rating = 0
 ) {
   this.title = title;
   this.author = author;
   this.era = era;
-  if (era === "AD") {
-    this.published = published;
-  } else if (era === "BC") {
-    this.published = - published;
-  }
+  if (published) {
+    if (era === "AD") {
+      this.published = published;
+    } else if (era === "BC") {
+      this.published = - published;
+    }
+  } else published = "";
   this.language = language;
   this.genre = genre;
   this.status = status;
@@ -120,10 +122,18 @@ function createRow(i) {
   publishedEra.appendChild(publishedEraCurrent);
   publishedEra.appendChild(publishedEraBeforeChrist);
 
-  publishedYear.value = Math.abs(myLibrary[i].published).toString();
+  if (typeof myLibrary[i].published === "number") {
+    publishedYear.value = Math.abs(myLibrary[i].published).toString();
+  } else {
+    publishedYear.value = myLibrary[i].published;
+  } 
   publishedYear.addEventListener("change", (e) => {
     if (!publishedYear.validity.valid) {
-      publishedYear.value = Math.abs(myLibrary[i].published).toString();
+      if (typeof myLibrary[i].published === "number") {
+        publishedYear.value = Math.abs(myLibrary[i].published).toString();
+      } else {
+        publishedYear.value = myLibrary[i].published;
+      }
     } else {
       if (myLibrary[i].era === "AD") {
         myLibrary[i].published = Number.parseInt(publishedYear.value);
@@ -134,6 +144,10 @@ function createRow(i) {
   });
   
   publishedEra.value = myLibrary[i].era;
+  publishedEra.addEventListener("change", () => {
+    myLibrary[i].era = publishedEra.value;
+    if (typeof myLibrary[i].published === "number") myLibrary[i].published = - myLibrary[i].published;
+  });
 
   publishedWrapper.appendChild(publishedYear);
   publishedWrapper.appendChild(publishedEra);
