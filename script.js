@@ -12,8 +12,12 @@ function Book(
 ) {
   this.title = title;
   this.author = author;
-  this.published = published;
   this.era = era;
+  if (era === "AD") {
+    this.published = published;
+  } else if (era === "BC") {
+    this.published = - published;
+  }
   this.language = language;
   this.genre = genre;
   this.status = status;
@@ -116,12 +120,16 @@ function createRow(i) {
   publishedEra.appendChild(publishedEraCurrent);
   publishedEra.appendChild(publishedEraBeforeChrist);
 
-  publishedYear.value = myLibrary[i].published.toString();
+  publishedYear.value = Math.abs(myLibrary[i].published).toString();
   publishedYear.addEventListener("change", (e) => {
     if (!publishedYear.validity.valid) {
-      publishedYear.value = myLibrary[i].published.toString();
+      publishedYear.value = Math.abs(myLibrary[i].published).toString();
     } else {
-      myLibrary[i].published = Number.parseInt(publishedYear.value);
+      if (myLibrary[i].era === "AD") {
+        myLibrary[i].published = Number.parseInt(publishedYear.value);
+      } else if (myLibrary[i].era === "BC") {
+        myLibrary[i].published = - Number.parseInt(publishedYear.value);
+      }
     }
   });
   
@@ -445,69 +453,69 @@ function createRowWithBtn(
 }
 
 
-let newBookForm = document.querySelector("form.add");
-newBookForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  let title = e.target.querySelector("#title").value;
-  let author = e.target.querySelector("#author").value;
-  let published = e.target.querySelector("#published").value;
-  let era = e.target.querySelector("#era").value;
-  let language = e.target.querySelector("#language").value;
-  let genre = e.target.querySelector("#genre").value;
-  let status = e.target.querySelector("#status").value;
-  let rating = parseInt(e.target.querySelector("#rating").value);
+// let newBookForm = document.querySelector("form.add");
+// newBookForm.addEventListener("submit", (e) => {
+//   e.preventDefault();
+//   let title = e.target.querySelector("#title").value;
+//   let author = e.target.querySelector("#author").value;
+//   let published = e.target.querySelector("#published").value;
+//   let era = e.target.querySelector("#era").value;
+//   let language = e.target.querySelector("#language").value;
+//   let genre = e.target.querySelector("#genre").value;
+//   let status = e.target.querySelector("#status").value;
+//   let rating = parseInt(e.target.querySelector("#rating").value);
 
-  createRowWithBtn(
-    title,
-    author,
-    published,
-    era,
-    language,
-    genre,
-    status,
-    rating
-  );
+//   createRowWithBtn(
+//     title,
+//     author,
+//     published,
+//     era,
+//     language,
+//     genre,
+//     status,
+//     rating
+//   );
 
-  const dataListTitle = e.target.querySelector("#for-title");
-  let dataListTitleOptions = Array.from(dataListTitle.children).map((child) => {
-    return child.value;
-  });
-  if (title && !(dataListTitleOptions.includes(title))) {
-    const option = document.createElement("option");
-    option.value = title; 
-    dataListTitle.appendChild(option);
-  } 
+//   const dataListTitle = e.target.querySelector("#for-title");
+//   let dataListTitleOptions = Array.from(dataListTitle.children).map((child) => {
+//     return child.value;
+//   });
+//   if (title && !(dataListTitleOptions.includes(title))) {
+//     const option = document.createElement("option");
+//     option.value = title; 
+//     dataListTitle.appendChild(option);
+//   } 
   
-  const dataListAuthor = e.target.querySelector("#for-author");
-  let dataListAuthorOptions = Array.from(dataListAuthor.children).map((child) => {
-    return child.value;
-  });
-  if (author && !(dataListAuthorOptions.includes(author))) {
-    const option = document.createElement("option");
-    option.value = author; 
-    dataListAuthor.appendChild(option);
-  } 
+//   const dataListAuthor = e.target.querySelector("#for-author");
+//   let dataListAuthorOptions = Array.from(dataListAuthor.children).map((child) => {
+//     return child.value;
+//   });
+//   if (author && !(dataListAuthorOptions.includes(author))) {
+//     const option = document.createElement("option");
+//     option.value = author; 
+//     dataListAuthor.appendChild(option);
+//   } 
 
-  const dataListPublished = e.target.querySelector("#for-published");
-  let dataListPublishedOptions = Array.from(dataListPublished.children).map((child) => {
-    return child.value;
-  });
-  if (published && !(dataListPublishedOptions.includes(published))) {
-    const option = document.createElement("option");
-    option.value = published; 
-    dataListPublished.appendChild(option);
-  } 
+//   const dataListPublished = e.target.querySelector("#for-published");
+//   let dataListPublishedOptions = Array.from(dataListPublished.children).map((child) => {
+//     return child.value;
+//   });
+//   if (published && !(dataListPublishedOptions.includes(published))) {
+//     const option = document.createElement("option");
+//     option.value = published; 
+//     dataListPublished.appendChild(option);
+//   } 
 
-  const dataListLanguage = e.target.querySelector("#for-language");
-  let dataListLanguageOptions = Array.from(dataListLanguage.children).map((child) => {
-    return child.value;
-  });
-  if (language && !(dataListLanguageOptions.includes(language))) {
-    const option = document.createElement("option");
-    option.value = language; 
-    dataListLanguage.appendChild(option);
-  }
-});
+//   const dataListLanguage = e.target.querySelector("#for-language");
+//   let dataListLanguageOptions = Array.from(dataListLanguage.children).map((child) => {
+//     return child.value;
+//   });
+//   if (language && !(dataListLanguageOptions.includes(language))) {
+//     const option = document.createElement("option");
+//     option.value = language; 
+//     dataListLanguage.appendChild(option);
+//   }
+// });
 
 const removeAllBtn = document.querySelector(".remove-all");
 removeAllBtn.addEventListener("click", () => {
@@ -633,10 +641,50 @@ for (let head of heads) {
         head.querySelector("span").textContent = "(click to sort)"; 
       });
       span.textContent = "(ascending)";
+      myLibrary.sort((book1, book2) => {
+        let headID = head.id; 
+        let property1 = book1[headID];
+        if (typeof property1 === "string") property1 = property1.toUpperCase();
+        let property2 = book2[headID];
+        if (typeof property2 === "string") property2 = property2.toUpperCase();
+        if (property1 > property2) return 1;
+        if (property1 < property2) return -1;
+        return 0;
+      });
+      const tbody = Array.from(table.children);
+      for (let i = 0; i < tbody.length; i++) tbody[i].remove();
+      fillTable();
+
     } else if (span.textContent === "(ascending)") {
       span.textContent = "(descending)";
+      myLibrary.sort((book1, book2) => {
+        let headID = head.id; 
+        let property1 = book1[headID];
+        if (typeof property1 === "string") property1 = property1.toUpperCase();
+        let property2 = book2[headID];
+        if (typeof property2 === "string") property2 = property2.toUpperCase();
+        if (property1 < property2) return 1;
+        if (property1 >  property2) return -1;
+        return 0;
+      });
+      const tbody = Array.from(table.children);
+      for (let i = 0; i < tbody.length; i++) tbody[i].remove();
+      fillTable();
     } else if (span.textContent === "(descending)") {
       span.textContent = "(ascending)";
+      myLibrary.sort((book1, book2) => {
+        let headID = head.id; 
+        let property1 = book1[headID];
+        if (typeof property1 === "string") property1 = property1.toUpperCase();
+        let property2 = book2[headID];
+        if (typeof property2 === "string") property2 = property2.toUpperCase();
+        if (property1 > property2) return 1;
+        if (property1 < property2) return -1;
+        return 0;
+      });
+      const tbody = Array.from(table.children);
+      for (let i = 0; i < tbody.length; i++) tbody[i].remove();
+      fillTable();
     }
   });
 }
