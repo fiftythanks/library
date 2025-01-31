@@ -180,6 +180,10 @@ function createRow(i) {
   rate.appendChild(nineStars);
   rate.appendChild(tenStars);
 
+  rate.addEventListener("change", () => {
+    myLibrary[number.position].rating = Number.parseInt(rate.value);
+  });
+
   rating.appendChild(rate); 
   row.appendChild(rating);
 
