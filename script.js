@@ -42,11 +42,10 @@ function addBookToLibrary(
                         );
   myLibrary.push(newBook);
 }
-
+const entireTable = document.querySelector("table");
+const table = document.querySelector("tbody");
 function createRow(i) { 
   if (i === undefined) i = myLibrary.length - 1;
-  const entireTable = document.querySelector("table");
-  const table = document.querySelector("tbody");
   const row = document.createElement("tr");
 
   const number = document.createElement("td");
@@ -286,7 +285,7 @@ function createRow(i) {
   });
 
   removeCell.appendChild(removeBtn);
-  row.appendChild(removeCell);  
+  row.appendChild(removeCell);
 
   table.appendChild(row);
 }
@@ -383,6 +382,13 @@ newBookForm.addEventListener("submit", (e) => {
     option.value = language; 
     dataListLanguage.appendChild(option);
   }
+});
+
+const removeAllBtn = document.querySelector(".remove-all");
+removeAllBtn.addEventListener("click", () => {
+  myLibrary.splice(0, myLibrary.length);
+  const tbody = Array.from(table.children);
+  for (let i = 0; i < tbody.length; i++) tbody[i].remove();
 });
 
 function createDefaultRows() {
