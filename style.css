@@ -182,3 +182,7 @@ div.status-rating {
 .rating option {
   text-align: center;
 }
+
+th > span {
+  font-weight: 400;
+}

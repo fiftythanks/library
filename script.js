@@ -621,3 +621,22 @@ document.addEventListener("keyup", (e) => {
     document.removeEventListener("keyup", createBlankRowOnEnter);
   }
 });
+
+let heads = Array.from(entireTable.querySelectorAll("th"));
+heads.splice(0, 1);
+heads.splice(heads.length - 1, 1);
+for (let head of heads) {
+  const span = head.querySelector("span");
+  head.addEventListener("click", () => {
+    if (span.textContent === "(click to sort)") {
+      heads.forEach((head) => {
+        head.querySelector("span").textContent = "(click to sort)"; 
+      });
+      span.textContent = "(ascending)";
+    } else if (span.textContent === "(ascending)") {
+      span.textContent = "(descending)";
+    } else if (span.textContent === "(descending)") {
+      span.textContent = "(ascending)";
+    }
+  });
+}
