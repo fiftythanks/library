@@ -299,7 +299,32 @@ function createRow(i) {
 
   const status = document.createElement("td");
   status.classList.add("status");
-  status.textContent = myLibrary[i].status;
+  
+  const statuses = document.createElement("select");
+  statuses.classList.add("status");
+  
+  const read = document.createElement("option");
+  read.value = "Read";
+  read.textContent = "Read";
+  statuses.appendChild(read);
+
+  const reading = document.createElement("option");
+  reading.value = "Reading";
+  reading.textContent = "Reading";
+  statuses.appendChild(reading);
+
+  const toRead = document.createElement("option");
+  toRead.value = "To read";
+  toRead.textContent = "To read";
+  statuses.appendChild(toRead);
+
+  statuses.value = myLibrary[i].status;
+  statuses.addEventListener("change", () => {
+    myLibrary[i].status = statuses.value;
+  });
+
+  status.appendChild(statuses);
+
   row.appendChild(status);
 
   const rating = document.createElement("td");
