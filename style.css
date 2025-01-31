@@ -123,9 +123,7 @@ td.title {
 
 :is(th, td):is(.rating, .published) {
   text-align: right;
-}
-
-
+} 
 
 td.rating {
   position: relative;
@@ -134,14 +132,16 @@ td.rating {
   }
 }
 
-.remove-btn {
+
+
+/* .remove-btn {
   --btn-height: 2rem;
   height: var(--btn-height);
   position: absolute;
   left: calc(100% + 1rem);
   top: calc(50% - var(--btn-height) / 2);
   bottom: calc(50% - var(--btn-height) / 2);
-}
+} */
 
 .add-btn, .reset-btn {
   padding: 0.3rem var(--horizontal-padding);

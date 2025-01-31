@@ -201,7 +201,6 @@ function createRow(i) {
   // Move focus to the next focusable cell in the row if the current cell isn't the one before the remove button
   addNavigation(language);  
 
-
   row.appendChild(language);
 
   const genre = document.createElement("td");
@@ -218,6 +217,8 @@ function createRow(i) {
 
   const rating = document.createElement("td");
   rating.classList.add("rating");
+  rating.focusNextCell = false;
+  rating.tabIndex = 0;
   const rate = document.createElement("select");
   rate.name = "rating";
   const noStar = document.createElement("option");
@@ -267,10 +268,13 @@ function createRow(i) {
   rate.appendChild(tenStars);
 
   rating.appendChild(rate); 
+  addNavigation(rating);
+  row.appendChild(rating);
 
+  const removeCell = document.createElement("td");
   const removeBtn = document.createElement("button");
   removeBtn.classList.add("remove-btn");
-  removeBtn.textContent = "Remove";
+  removeBtn.textContent = "×";
   removeBtn.addEventListener("click", () => {
     myLibrary.splice(number.position, 1);
     let position = number.position;
@@ -280,9 +284,9 @@ function createRow(i) {
       table.children[i].querySelector(".order").position--;
     }
   });
-  rating.appendChild(removeBtn);
 
-  row.appendChild(rating);
+  removeCell.appendChild(removeBtn);
+  row.appendChild(removeCell);  
 
   table.appendChild(row);
 }
