@@ -602,11 +602,12 @@ function createBlankRow() {
     "Read",
     0
   );
+  table.lastElementChild.querySelector(".title").focus();
 }
 
 function createBlankRowOnEnter(e) {
   if (e.code === "Enter") {
-    createBlankRow(); 
+    createBlankRow();
   } 
 }
 
