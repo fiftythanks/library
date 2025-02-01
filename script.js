@@ -408,9 +408,10 @@ function createRow(i) {
   row.appendChild(rating);
 
   const removeCell = document.createElement("td");
+  const removeBtnWrapper = document.createElement("div");
+  removeBtnWrapper.classList.add("remove-btn-wrapper");
   const removeBtn = document.createElement("button");
   removeBtn.classList.add("remove-btn");
-  removeBtn.textContent = "×";
   removeBtn.addEventListener("click", () => {
     myLibrary.splice(number.position, 1);
     let position = number.position;
@@ -420,8 +421,15 @@ function createRow(i) {
       table.children[i].querySelector(".order").position--;
     }
   });
+  const removeIcon = document.createElement("img");
+  removeIcon.setAttribute("src", "img/remove.svg");
+  removeIcon.alt = "Remove";
+  removeIcon.setAttribute("width", "16px");
+  removeIcon.setAttribute("height", "16px");
 
-  removeCell.appendChild(removeBtn);
+  removeBtn.appendChild(removeIcon);
+  removeBtnWrapper.appendChild(removeBtn);
+  removeCell.appendChild(removeBtnWrapper);
   row.appendChild(removeCell);
 
   // No return escape characters in cell edits
@@ -613,6 +621,7 @@ function createDefaultRows() {
 
 createDefaultRows();   
 
+// Add new row with Control+Enter functionality
 function createBlankRow() {
   createRowWithBtn(
     "",
@@ -644,17 +653,18 @@ document.addEventListener("keyup", (e) => {
   }
 });
 
+// Sorting  
 let heads = Array.from(entireTable.querySelectorAll("th"));
 heads.splice(0, 1);
 heads.splice(heads.length - 1, 1);
 for (let head of heads) {
-  const span = head.querySelector("span");
+  const icon = head.querySelector("img");
   head.addEventListener("click", () => {
-    if (span.textContent === "(click to sort)") {
+    if (icon.src.endsWith("sort.svg")) {
       heads.forEach((head) => {
-        head.querySelector("span").textContent = "(click to sort)"; 
+        head.querySelector("img").src = head.querySelector("img").src.replace(/ascending\.svg|descending\.svg/g, "sort.svg"); 
       });
-      span.textContent = "(ascending)";
+      icon.src = icon.src.replace("sort.svg", "ascending.svg");
       myLibrary.sort((book1, book2) => {
         let headID = head.id; 
         let property1 = book1[headID];
@@ -669,8 +679,8 @@ for (let head of heads) {
       for (let i = 0; i < tbody.length; i++) tbody[i].remove();
       fillTable();
 
-    } else if (span.textContent === "(ascending)") {
-      span.textContent = "(descending)";
+    } else if (icon.src.endsWith("ascending.svg")) {
+      icon.src = icon.src.replace("ascending.svg", "descending.svg");
       myLibrary.sort((book1, book2) => {
         let headID = head.id; 
         let property1 = book1[headID];
@@ -684,10 +694,10 @@ for (let head of heads) {
       const tbody = Array.from(table.children);
       for (let i = 0; i < tbody.length; i++) tbody[i].remove();
       fillTable();
-    } else if (span.textContent === "(descending)") {
-      span.textContent = "(ascending)";
+    } else if (icon.src.endsWith("descending.svg")) {
+      icon.src = icon.src.replace("descending.svg", "ascending.svg");
       myLibrary.sort((book1, book2) => {
-        let headID = head.id; 
+        let headID = head.id;   
         let property1 = book1[headID];
         if (typeof property1 === "string") property1 = property1.toUpperCase();
         let property2 = book2[headID];

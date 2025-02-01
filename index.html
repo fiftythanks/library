@@ -25,19 +25,73 @@
         <!-- later, add a button to create custom columns and a button to remove columns -->
         <tr class="head-row">
           <th></th>
-          <th class="title" id="title">Title <span>(click to sort)</span></th>
-          <th class="author" id="author">Author <span>(click to sort)</span></th>
-          <th class="published" id="published">Published <span>(click to sort)</span></th>
-          <th class="language" id="language">Language <span>(click to sort)</span></th>
-          <th class="genre" id="genre">Genre <span>(click to sort)</span></th>
-          <th class="status" id="status">Status <span>(click to sort)</span></th>
-          <th class="rating" id="rating">Rating <span>(click to sort)</span></th>
-          <th class="remove" id="remove">
-            <button type="button" class="remove-all">×</button>
+          <th class="title" id="title">
+            Title
+                <img
+              src="img/sort.svg"
+              alt="Sort"
+              class="sort"
+              height="10px"
+              width="10px">
           </th>
-        </tr> 
+          <th class="author" id="author">
+            Author
+                <img
+              src="img/sort.svg"
+              alt="Sort"
+              class="sort"
+              height="10px"
+              width="10px">
+          </th>
+          <th class="published" id="published">
+            <img
+              src="img/sort.svg"
+              alt="Sort"
+              class="sort"
+              height="10px"
+              width="10px">
+            Published
+          </th>
+          <th class="language" id="language">Language
+                <img
+              src="img/sort.svg"
+              alt="Sort"
+              class="sort"
+              height="10px"
+              width="10px">
+          </th>
+          <th class="genre" id="genre">Genre
+                <img
+              src="img/sort.svg"
+              alt="Sort"
+              class="sort"
+              height="10px"
+              width="10px">
+          </th>
+          <th class="status" id="status">Status
+                <img
+              src="img/sort.svg"
+              alt="Sort"
+              class="sort"
+              height="10px"
+              width="10px">
+          </th>
+          <th class="rating" id="rating">Rating
+                <img
+              src="img/sort.svg"
+              alt="Sort"
+              class="sort"
+              height="10px"
+              width="10px">
+          </th>
+          <th class="remove" id="remove">
+            <div class="remove-btn-wrapper">
+              <button type="button" class="remove-all"><img src="img/remove.svg" alt="Remove all" width="16px", height="16px"></button>
+            </div>
+          </th>
+        </tr>
       </thead>
-      <tbody> 
+      <tbody>
         <!-- <tr>
           <td class="order">1</td>
           <td class="title">Harry Potter and the Philosopher's Stone</td>
@@ -48,10 +102,11 @@
           <td class="status">Read</td>
           <td class="rating">
             <summary></summary>
-          </td> 
+          </td>
         </tr> -->
       </tbody>
     </table>
+    <p>To create a new row, press <kbd>Ctrl+Enter</kbd></p>
     <!-- <form action="#" method="post" class="add">
       <div class="title">
         <label for="title">Title</label>
